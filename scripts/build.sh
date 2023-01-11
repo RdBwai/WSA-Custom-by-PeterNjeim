@@ -909,7 +909,14 @@ else
         echo ":warning: Since OpenGApps doesn't officially support Android 12.1 yet, lock the variant to pico!"
     fi
 fi
-artifact_name="WSA"
+artifact_name="WSA_${WSA_VER}_${ARCH}_${WSA_REL}${name1}${name2}"
+if [ "$NOFIX_PROPS" = "yes" ]; then
+    artifact_name+="-NoFixProps"
+fi
+if [ "$REMOVE_AMAZON" = "yes" ]; then
+    artifact_name+="-RemovedAmazon"
+fi
+echo "$artifact_name"
 echo -e "\nFinishing building...."
 if [ -f "$OUTPUT_DIR" ]; then
     $SUDO rm -rf "${OUTPUT_DIR:?}"
